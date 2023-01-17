@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+
+	"github.com/dustin/go-humanize"
 )
 
 func main() {
@@ -10,7 +12,8 @@ func main() {
 	printPositiveSquaresLessThan(40)
 	printAllPositiveDivisorsOf(2020)
 	swapValuesByPointers()
-	isHatNeeded()
+	// isHatNeeded()
+	printByteInGB()
 }
 
 func printFirstNSquares(n int) {
@@ -68,6 +71,27 @@ func isHatNeeded() {
 
 }
 
-func printByteInGB(s uint64) {
-
+func printByteInGB() {
+	var s uint64
+	fmt.Println("Enter available disk size in byte: ")
+	fmt.Scanln(&s)
+	fmt.Printf("Your available this size: %s.", humanize.Bytes(s))
 }
+
+// func printRealRootOf() {
+// 	var a, b, c float64
+// 	fmt.Println("Enter a: ")
+// 	fmt.Scanln(&a)
+// 	fmt.Println("Enter b: ")
+// 	fmt.Scanln(&b)
+// 	fmt.Println("Enter c: ")
+// 	fmt.Scanln(&c)
+// 	d := b*b - (4 * a * c)
+// 	var r float64
+// 	switch d {
+// 	case d < 0:
+// 		r = 0
+// 	default:
+// 		fmt.Println("It's after noon")
+// 	}
+// }
