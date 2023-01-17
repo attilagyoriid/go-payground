@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/dustin/go-humanize"
 )
@@ -13,7 +14,12 @@ func main() {
 	printAllPositiveDivisorsOf(2020)
 	swapValuesByPointers()
 	// isHatNeeded()
-	printByteInGB()
+	// printByteInGB()
+	primitiveTypesArithmetic()
+	walkingOnSunshine("I used to think maybe you loved me, now I know that it's true")
+	walkingOnSunshine("Now, I don't want you back for the weekend, not back for a day")
+	intToBinary()
+
 }
 
 func printFirstNSquares(n int) {
@@ -95,3 +101,65 @@ func printByteInGB() {
 // 		fmt.Println("It's after noon")
 // 	}
 // }
+
+func primitiveTypesArithmetic() {
+
+	var a float64 = 0
+
+	for i := 0; i < 10; i++ {
+		a += .1
+	}
+
+	fmt.Printf("%t\n", a == 1.0)
+}
+
+func walkingOnSunshine(s string) {
+
+	fw, nl := firstWordsAndItsLenght(s)
+	fmt.Printf("The first word is \"%s\", which consists of %d letter(s).\n", fw, nl)
+	fmt.Printf("The second clause is: \"%s\"\n", secondCaluse(s))
+	fmt.Printf("The last five characters of the string is: \"%s\"\n", lastFiveChar(s))
+
+}
+
+func firstWordsAndItsLenght(s string) (string, int) {
+	var nl int
+	for i := range s {
+
+		if s[i] == ' ' {
+			return s[0:i], nl
+		}
+		nl++
+	}
+	return s, nl
+}
+
+func secondCaluse(s string) string {
+
+	return strings.Split(strings.Split(s, ",")[1], ",")[0]
+}
+
+func lastFiveChar(s string) string {
+
+	return s[len(s)-5:]
+}
+
+func intToBinary() {
+	var s uint16
+	fmt.Println("Enter non-negative integer: ")
+	fmt.Scanln(&s)
+
+	fmt.Printf("Binary number: %016b\n", s)
+	fmt.Print("Binary number: ")
+	{
+
+		for i := 1 << 15; i > 0; i = i / 2 {
+			if int(s)&i != 0 {
+				fmt.Print("1")
+			} else {
+				fmt.Print("0")
+			}
+		}
+	}
+
+}
