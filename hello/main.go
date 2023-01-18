@@ -2,7 +2,9 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
 	"strings"
+	"time"
 
 	"github.com/dustin/go-humanize"
 )
@@ -18,7 +20,11 @@ func main() {
 	primitiveTypesArithmetic()
 	walkingOnSunshine("I used to think maybe you loved me, now I know that it's true")
 	walkingOnSunshine("Now, I don't want you back for the weekend, not back for a day")
-	intToBinary()
+	// intToBinary()
+
+	reverseSlice([]int{1, 2, 3, 4, 5})
+	reverseSliceInplace([]int{1, 2, 3, 4, 5})
+	minMax()
 
 }
 
@@ -162,4 +168,54 @@ func intToBinary() {
 		}
 	}
 
+}
+
+func reverseSlice(is []int) {
+	fmt.Printf("Before reverse %v: ", is)
+	var reverse []int
+
+	for i := len(is) - 1; i >= 0; i-- {
+		reverse = append(reverse, is[i])
+	}
+
+	fmt.Printf("After reverse %v: ", reverse)
+}
+
+func reverseSliceInplace(is []int) {
+	fmt.Printf("Before reverse: %v \n", is)
+
+	for i, j := 0, len(is)-1; i < j; i, j = i+1, j-1 {
+		is[i], is[j] = is[j], is[i]
+	}
+
+	fmt.Printf("After reverse: %v \n", is)
+}
+
+func minMax() {
+	rand.Seed(time.Now().UnixNano())
+	type sl [5]float32
+	var matrix = make([]sl, 3)
+	var min float32 = -100
+	var max float32 = 100
+	for i := 0; i < cap(matrix); i++ {
+		for j := 0; j < cap(matrix[0]); j++ {
+			matrix[i][j] = min + rand.Float32()*(max-min)
+		}
+	}
+	fmt.Printf("matrix: %v \n", matrix)
+	for i := 0; i < 3; i++ {
+		fmt.Printf("%+.4f \n", matrix[i])
+	}
+
+	for i := 0; i < cap(matrix); i++ {
+		for j := 0; j < cap(matrix[0]); j++ {
+			if min < matrix[i][j] {
+				min = matrix[i][j]
+			}
+			if max > matrix[i][j] {
+				max = matrix[i][j]
+			}
+		}
+	}
+	fmt.Printf("min: %f max: %f \n", min, max)
 }
